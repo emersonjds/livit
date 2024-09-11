@@ -2,6 +2,11 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "module": "ESNext",                // Permite o uso de ES Modules
+    "moduleResolution": "node",        // Resolve os módulos de forma compatível com Node.js
+    "target": "ESNext",                // Transpila para a versão mais moderna do JavaScript
+    "esModuleInterop": true,           // Interop entre CommonJS e ES Modules
+    "allowSyntheticDefaultImports": true, // Permite imports padrão de módulos
     "paths": {
       "@/*": [
         "./*"
