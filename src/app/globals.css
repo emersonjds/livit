@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;       /* slate-900 */
+  --primary: #1d4ed8;          /* livit blue (blue-700) */
+  --primary-hover: #1e40af;
+  --primary-foreground: #ffffff;
+  --primary-soft: #e0ecff;     /* blue tint for backgrounds */
+  --accent: #2563eb;
+  --muted: #64748b;            /* slate-500 */
+  --card: #ffffff;
+  --border: #dbe6f5;           /* subtle blue-tinted border */
+  --border-strong: #cbd5e1;    /* slate-300 */
+  --surface: #f4f8ff;          /* faint blue wash */
+}
+
+html.dark {
+  color-scheme: dark;
+  --background: #0b1220;       /* deep navy */
+  --foreground: #f1f5f9;
+  --primary: #60a5fa;          /* blue-400 for contrast on dark */
+  --primary-hover: #93c5fd;
+  --primary-foreground: #0b1220;
+  --primary-soft: #0f2447;
+  --accent: #60a5fa;
+  --muted: #94a3b8;
+  --card: #111a2e;
+  --border: #1e2a44;
+  --border-strong: #243352;
+  --surface: #0d1426;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overscroll-behavior-y: contain;
 }
+
+input, select, textarea, button {
+  font: inherit;
+  color: inherit;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
