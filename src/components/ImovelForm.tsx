@@ -6,6 +6,7 @@ import Button from "./Button";
 import { Field, Select, Textarea, Toggle, Chip } from "./Field";
 import { formatCurrencyInput, parseCurrency } from "@/lib/formatters";
 import { gerarId, salvarImovel } from "@/lib/store";
+import { COMISSAO_PADRAO_DEFAULT, obterConfig } from "@/lib/storage";
 import type { AceitaPermutaEm, Imovel, TipoImovel } from "@/lib/types";
 
 const TIPOS: TipoImovel[] = ["Apartamento", "Casa", "Terreno", "Comercial", "Rural", "Galpão"];
@@ -39,7 +40,11 @@ export default function ImovelForm({ imovel }: { imovel?: Imovel }) {
     imovel?.aceitaPermutaEm ?? []
   );
   const [valorMaxPermuta, setValorMaxPermuta] = useState(numStr(imovel?.valorMaxPermuta));
-  const [comissao, setComissao] = useState(numStr(imovel?.comissaoPercentual) || "5");
+  const [comissao, setComissao] = useState(() => {
+    if (imovel) return numStr(imovel.comissaoPercentual);
+    const padrao = obterConfig().comissaoPadrao ?? COMISSAO_PADRAO_DEFAULT;
+    return String(padrao);
+  });
 
   const [nomeProp, setNomeProp] = useState(imovel?.proprietario.nome ?? "");
   const [telProp, setTelProp] = useState(imovel?.proprietario.telefone ?? "");
@@ -204,7 +209,7 @@ export default function ImovelForm({ imovel }: { imovel?: Imovel }) {
       >
         <Toggle checked={aceitaPermuta} onChange={setAceitaPermuta} label="Aceita permuta" />
         {aceitaPermuta && (
-          <div className="space-y-3 rounded-xl border border-border bg-surface p-4">
+          <div className="space-y-3 rounded-lg border border-border bg-surface p-4">
             <div>
               <p className="mb-2 text-sm font-medium">Aceita em troca:</p>
               <div className="flex flex-wrap gap-2">
@@ -310,7 +315,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-border bg-card p-4 shadow-sm md:p-6">
+    <section className="rounded-lg border border-border bg-card p-4 shadow-sm md:p-6">
       <header className="mb-4">
         <h2 className="text-base font-semibold md:text-lg">{title}</h2>
         {subtitle && <p className="mt-0.5 text-sm text-muted">{subtitle}</p>}

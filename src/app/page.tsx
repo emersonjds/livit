@@ -86,7 +86,7 @@ export default function HomePage() {
 
 function EmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-border bg-card/50 p-8 text-center">
+    <div className="rounded-lg border border-dashed border-border bg-card/50 p-8 text-center">
       <p className="text-sm text-muted">Nenhum imóvel encontrado com esses filtros.</p>
     </div>
   );

@@ -65,7 +65,7 @@ export default function PermutaCalculator({
       />
 
       {itemValor > 0 && (
-        <div className="rounded-2xl border border-border bg-card p-4 space-y-2">
+        <div className="rounded-lg border border-border bg-card p-4 space-y-2">
           <Row label="Valor do imóvel" value={formatBRL(imovel.valor)} />
           <Row label={`Item em permuta (${itemTipo})`} value={`- ${formatBRL(itemValor)}`} />
           <div className="my-2 h-px bg-border" />
