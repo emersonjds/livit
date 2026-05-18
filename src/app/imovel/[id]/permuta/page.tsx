@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { use, useState } from "react";
 import Header from "@/components/Header";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Button from "@/components/Button";
 import { Textarea } from "@/components/Field";
 import PermutaCalculator, {
@@ -56,10 +57,20 @@ export default function PropostaPermutaPage({ params }: { params: Params }) {
   };
 
   return (
-    <div className="px-4 pb-32">
+    <div className="px-4 md:px-0 pb-32">
       <Header title="Simular permuta" showBack />
 
-      <div className="mb-4 rounded-2xl border border-border bg-card p-4">
+      <div className="mb-4 hidden md:block">
+        <Breadcrumbs
+          items={[
+            { label: "Imóveis", href: "/" },
+            { label: imovel.titulo, href: `/imovel/${imovel.id}` },
+            { label: "Simular permuta" },
+          ]}
+        />
+      </div>
+
+      <div className="mb-4 rounded-lg border border-border bg-card p-4">
         <p className="text-xs uppercase text-muted">Imóvel</p>
         <p className="font-medium leading-tight">{imovel.titulo}</p>
         <p className="mt-0.5 text-sm text-muted">
