@@ -1,5 +1,8 @@
 import { forwardRef } from "react";
 
+const inputBase =
+  "w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 dark:bg-card dark:border-border dark:text-foreground";
+
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   hint?: string;
@@ -11,15 +14,15 @@ export const Field = forwardRef<HTMLInputElement, InputProps>(
     return (
       <label className="block">
         {label && (
-          <span className="mb-1 block text-sm font-medium text-foreground/90">{label}</span>
+          <span className="mb-1.5 block text-sm font-medium text-foreground">{label}</span>
         )}
         <input
           ref={ref}
           {...props}
-          className={`w-full rounded-xl border border-border bg-card px-3 py-3 text-base outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 ${className}`}
+          className={`${inputBase} ${className}`}
         />
-        {hint && !error && <span className="mt-1 block text-xs text-muted">{hint}</span>}
-        {error && <span className="mt-1 block text-xs text-red-600">{error}</span>}
+        {hint && !error && <span className="mt-1.5 block text-xs text-muted">{hint}</span>}
+        {error && <span className="mt-1.5 block text-xs text-danger">{error}</span>}
       </label>
     );
   }
@@ -34,11 +37,11 @@ export function Select({ label, options, className = "", ...props }: SelectProps
   return (
     <label className="block">
       {label && (
-        <span className="mb-1 block text-sm font-medium text-foreground/90">{label}</span>
+        <span className="mb-1.5 block text-sm font-medium text-foreground">{label}</span>
       )}
       <select
         {...props}
-        className={`w-full rounded-xl border border-border bg-card px-3 py-3 text-base outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 ${className}`}
+        className={`${inputBase} ${className}`}
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -58,11 +61,11 @@ export function Textarea({ label, className = "", ...props }: TextareaProps) {
   return (
     <label className="block">
       {label && (
-        <span className="mb-1 block text-sm font-medium text-foreground/90">{label}</span>
+        <span className="mb-1.5 block text-sm font-medium text-foreground">{label}</span>
       )}
       <textarea
         {...props}
-        className={`w-full rounded-xl border border-border bg-card px-3 py-3 text-base outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 ${className}`}
+        className={`${inputBase} ${className}`}
       />
     </label>
   );
@@ -81,16 +84,16 @@ export function Toggle({
     <button
       type="button"
       onClick={() => onChange(!checked)}
-      className="flex w-full items-center justify-between rounded-xl border border-border bg-card px-3 py-3 text-left"
+      className="flex w-full items-center justify-between rounded-lg border border-border bg-surface px-3 py-2 text-left dark:bg-card dark:border-border"
     >
-      <span className="text-sm font-medium">{label}</span>
+      <span className="text-sm font-medium text-foreground">{label}</span>
       <span
-        className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-          checked ? "bg-primary" : "bg-foreground/15"
+        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+          checked ? "bg-primary" : "bg-border-strong"
         }`}
       >
         <span
-          className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
+          className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
             checked ? "translate-x-6" : "translate-x-1"
           }`}
         />
@@ -112,10 +115,10 @@ export function Chip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+      className={`rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
         active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border bg-card text-foreground/80 hover:border-foreground/30"
+          ? "border-primary bg-primary text-white"
+          : "border-border bg-surface text-foreground hover:border-primary/50 dark:bg-card"
       }`}
     >
       {children}
