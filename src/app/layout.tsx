@@ -2,14 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import BottomNav from "@/components/BottomNav";
 import TopNav from "@/components/TopNav";
+import Sidebar from "@/components/Sidebar";
 import "./globals.css";
-
-const themeInitScript = `(() => {
-  try {
-    const t = localStorage.getItem('theme');
-    if (t === 'dark') document.documentElement.classList.add('dark');
-  } catch {}
-})();`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1d4ed8",
+  themeColor: "#3c50e0",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -35,14 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${geistSans.variable} antialiased`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
-      <body className="min-h-dvh">
+    <html lang="pt-BR" className={`${geistSans.variable} antialiased`}>
+      <body className="min-h-dvh bg-background">
         <TopNav />
-        <main className="mx-auto w-full max-w-md md:max-w-7xl pb-24 md:pb-8 md:px-6">
-          {children}
+        <Sidebar />
+        <main className="min-h-dvh px-4 pb-24 pt-0 md:pl-72 md:pr-6 md:pb-8 md:pt-[calc(57px+1.5rem)]">
+          <div className="mx-auto w-full max-w-sm md:max-w-none">
+            {children}
+          </div>
         </main>
         <BottomNav />
       </body>

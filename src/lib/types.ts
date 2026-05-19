@@ -35,8 +35,8 @@ export interface Imovel {
   fotos: string[]; // urls ou data URIs
   aceitaPermuta: boolean;
   aceitaPermutaEm: AceitaPermutaEm[];
-  valorMaxPermuta?: number; // teto que o vendedor aceita receber em permuta
-  comissaoPercentual: number; // % de comissão do corretor
+  valorMaxPermuta?: number;
+  comissaoPercentual: number;
   proprietario: {
     nome: string;
     telefone: string;
@@ -46,15 +46,35 @@ export interface Imovel {
 
 export interface PropostaPermuta {
   id: string;
-  imovelOrigemId: string; // imóvel que está sendo vendido
+  imovelOrigemId: string;
   itemPermuta: {
     tipo: AceitaPermutaEm;
     descricao: string;
     valorEstimado: number;
-    imovelId?: string; // se for permuta de imóvel cadastrado
+    imovelId?: string;
   };
-  diferencaValor: number; // valor que o comprador ainda paga em dinheiro
-  comissaoEsperada: number; // calculada com base no comissaoPercentual do imóvel
+  diferencaValor: number;
+  comissaoEsperada: number;
   observacoes?: string;
   criadoEm: string;
+}
+
+export interface Compromisso {
+  id: string;
+  titulo: string;
+  data: string; // ISO date "YYYY-MM-DD"
+  hora: string; // "HH:mm"
+  imovelId?: string;
+  contato?: string;
+  observacoes?: string;
+  criadoEm: string;
+}
+
+export interface Corretor {
+  nome: string;
+  creci: string;
+  telefone: string;
+  email: string;
+  fotoUrl?: string;
+  bio?: string;
 }
